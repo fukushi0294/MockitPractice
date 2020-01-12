@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 
 class User(val userId: Int, val userName:String)
 
-class UserRepository() :IUserRepository{
+open class UserRepository :IUserRepository{
     override fun createUser(user: User) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -22,6 +22,10 @@ class UserRepository() :IUserRepository{
     }
 
     override fun getAllUser(): LiveData<MutableList<User>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun doSomeAction(): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

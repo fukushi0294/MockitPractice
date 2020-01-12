@@ -5,11 +5,10 @@ import androidx.lifecycle.*
 import com.example.mockit.model.IUserRepository
 import com.example.mockit.model.User
 import com.example.mockit.model.UserRepository
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class MyViewModel() : ViewModel() {
-
-    private lateinit var userRepository : IUserRepository
+class MyViewModel(private val userRepository : IUserRepository) : ViewModel() {
 
     private val users: MutableLiveData<MutableList<User>> by lazy {
         MutableLiveData<MutableList<User>>().also {
@@ -31,5 +30,11 @@ class MyViewModel() : ViewModel() {
     private fun loadUsers() {
         userRepository.getAllUser()
     }
+
+    var status = false
+    fun mockTest()
+         = viewModelScope.launch {
+            status = userRepository.doSomeAction()
+        }
 
 }

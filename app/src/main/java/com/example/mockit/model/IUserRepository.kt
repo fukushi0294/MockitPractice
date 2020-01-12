@@ -13,4 +13,6 @@ interface IUserRepository {
     fun getOneUser(userId: Int) : User
 
     fun getAllUser() : LiveData<MutableList<User>>
+
+    fun doSomeAction() : Boolean
 }
