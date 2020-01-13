@@ -1,19 +1,16 @@
 package com.example.mockit.model
 
-import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import okhttp3.*
-import java.io.IOException
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.lang.StringBuilder
+import java.io.IOException
 
 
 class User(val userId: Int, val userName:String)
 
-const val url = "SERVER_URL"
 const val TAG = "Http request"
 val mediaType = "application/json; charset=utf-8".toMediaType()
 
@@ -21,6 +18,10 @@ open class UserRepository :IUserRepository{
 
     private var client = OkHttpClient()
     private val mapper = jacksonObjectMapper()
+
+    override fun getServerURL() : String{
+        return  "http://dummy.example.co.jp"
+    }
 
     /**
      * Ref https://stackoverflow.com/questions/57100451/okhttp3-requestbody-createcontenttype-content-deprecated
@@ -48,7 +49,7 @@ open class UserRepository :IUserRepository{
     override fun createUser(user: User, callback: Callback) {
         val requestBody = createRequestBody(user)
         val request = Request.Builder()
-            .url("$url+/create")
+            .url("${getServerURL()}+/create")
             .post(requestBody)
             .build()
 
@@ -58,7 +59,7 @@ open class UserRepository :IUserRepository{
     override fun updateUser(user: User, callback: Callback) {
         val requestBody = createRequestBody(user)
         val request = Request.Builder()
-            .url("$url+/update")
+            .url("${getServerURL()}+/update")
             .post(requestBody)
             .build()
 
@@ -68,7 +69,7 @@ open class UserRepository :IUserRepository{
     override fun deleteUser(user: User, callback: Callback) {
         val requestBody = createRequestBody(user)
         val request = Request.Builder()
-            .url("$url+/delete")
+            .url("${getServerURL()}+/delete")
             .post(requestBody)
             .build()
 
@@ -88,6 +89,6 @@ open class UserRepository :IUserRepository{
      *
      */
     override fun doSomeAction(): Boolean {
-        TODO("Since this will be mocked, no need to implement") //To change body of created functions use File | Settings | File Templates.
+        return false
     }
 }

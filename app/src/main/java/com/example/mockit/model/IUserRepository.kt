@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import okhttp3.Callback
 
 interface IUserRepository {
+    /**
+     * For mock the server URL
+     */
+    fun getServerURL() :String
 
     fun createUser(user: User, callback : Callback)
 
